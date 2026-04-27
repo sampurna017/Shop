@@ -12,14 +12,11 @@ let products = [
 let cart=[];
 let current=[...products];
 
-/* LOAD */
 function load(){
  let box=document.getElementById("products");
  box.innerHTML="";
-
  current.forEach(p=>{
   let dis=Math.round(((p.old-p.price)/p.old)*100);
-
   box.innerHTML+=`
   <div class="card">
    <div class="badge">-${dis}%</div>
@@ -32,19 +29,15 @@ function load(){
  });
 }
 
-/* ADD */
 function add(id){
  let item=products.find(p=>p.id===id);
  let exist=cart.find(c=>c.id===id);
-
  if(exist){exist.qty++}
  else{cart.push({...item,qty:1})}
-
  update();
  showToast();
 }
 
-/* UPDATE */
 function update(){
  let items=document.getElementById("items");
  items.innerHTML="";
@@ -53,13 +46,9 @@ function update(){
  cart.forEach(p=>{
   total+=p.price*p.qty;
   count+=p.qty;
-
   items.innerHTML+=`
   <div class="cart-item">
-   <div>
-    <strong>${p.name}</strong><br>
-    Rs ${p.price} x ${p.qty}
-   </div>
+   <div><strong>${p.name}</strong><br>Rs ${p.price} x ${p.qty}</div>
    <div class="cart-controls">
     <button onclick="decrease(${p.id})">-</button>
     <button onclick="increase(${p.id})">+</button>
@@ -97,7 +86,7 @@ function filter(c){
 
 function purchase(){
  if(cart.length===0) return alert("Cart empty!");
- alert("✅ Purchased successfully!");
+ alert("✅ Purchased!");
  cart=[];
  update();
  toggleCart();
