@@ -73,7 +73,6 @@ body{
 
 .card:hover{
   transform:translateY(-5px);
-  box-shadow:0 5px 15px rgba(0,0,0,0.5);
 }
 
 .card img{
@@ -93,7 +92,6 @@ body{
   padding:2px 5px;
 }
 
-/* PRICE */
 .price{color:#ff9800;font-weight:bold}
 .old{text-decoration:line-through;color:#aaa;font-size:12px}
 
