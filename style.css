@@ -119,3 +119,21 @@ button{
   margin-top:5px;
   width:100%;
 }
+/* CART ITEMS */
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+  padding:8px;
+  border-bottom:1px solid #333;
+}
+
+.cart-info{
+  font-size:14px;
+}
+
+.cart-controls button{
+  padding:3px 6px;
+  margin:2px;
+}
