@@ -1,111 +1,67 @@
 let products = [
-  {name:"Shoes", price:20, cat:"clothes", img:"https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg"},
-  {name:"T-Shirt", price:15, cat:"clothes", img:"https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg"},
-  {name:"Watch", price:50, cat:"tech", img:"https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg"}
+ {name:"Shoes",price:2500,old:3000,cat:"clothes",img:"https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg",rating:4.5},
+ {name:"T-Shirt",price:1500,old:2000,cat:"clothes",img:"https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg",rating:4.2},
+ {name:"Headphones",price:4000,old:5000,cat:"tech",img:"https://images.pexels.com/photos/3394665/pexels-photo-3394665.jpeg",rating:4.7},
+ {name:"Watch",price:5000,old:6500,cat:"tech",img:"https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg",rating:4.4}
 ];
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = [];
 let current = [...products];
 
 function load(){
-  let box = document.getElementById("products");
-  box.innerHTML = "";
-  current.forEach((p,i)=>{
-    box.innerHTML += `
-      <div class="card" onclick="openModal(${i})">
-        <img src="${p.img}">
-        <h3>${p.name}</h3>
-        <p>$${p.price}</p>
-      </div>
-    `;
-  });
+ let box = document.getElementById("products");
+ box.innerHTML = "";
+
+ current.forEach((p,i)=>{
+  let dis = Math.round(((p.old - p.price)/p.old)*100);
+
+  box.innerHTML += `
+  <div class="card">
+   <div class="badge">-${dis}%</div>
+   <img src="${p.img}">
+   <h4>${p.name}</h4>
+   ⭐ ${p.rating}
+   <p>Rs ${p.price} <span class="old">Rs ${p.old}</span></p>
+   <div class="tag">Free Delivery</div><br>
+   <button onclick="add(${i})">Add to Cart</button>
+  </div>`;
+ });
 }
 
-function openModal(i){
-  let p = current[i];
-  document.getElementById("modal").style.display = "flex";
-  document.getElementById("modalBox").innerHTML = `
-    <img src="${p.img}" width="100%">
-    <h3>${p.name}</h3>
-    <p>$${p.price}</p>
-    <button onclick="addItem('${p.name}', ${p.price})">Add</button>
-  `;
-}
-
-function addItem(name, price){
-  let item = cart.find(x => x.name === name);
-  if(item){ item.qty++; }
-  else { cart.push({name, price, qty:1}); }
-  save();
-  document.getElementById("modal").style.display = "none";
-}
-
-function save(){
-  localStorage.setItem("cart", JSON.stringify(cart));
-  update();
+function add(i){
+ cart.push(current[i]);
+ update();
 }
 
 function update(){
-  let items = document.getElementById("items");
-  items.innerHTML = "";
-  let total = 0, count = 0;
+ let items = document.getElementById("items");
+ items.innerHTML = "";
 
-  cart.forEach((item,i)=>{
-    total += item.price * item.qty;
-    count += item.qty;
+ let total = 0;
 
-    items.innerHTML += `
-      <div>
-        ${item.name} x${item.qty}
-        <button onclick="removeItem(${i})">X</button>
-      </div>
-    `;
-  });
+ cart.forEach(p=>{
+  total += p.price;
+  items.innerHTML += `<p>${p.name} - Rs ${p.price}</p>`;
+ });
 
-  document.getElementById("total").innerText = total;
-  document.getElementById("count").innerText = count;
-}
-
-function removeItem(i){
-  cart.splice(i,1);
-  save();
+ document.getElementById("total").innerText = total;
+ document.getElementById("count").innerText = cart.length;
 }
 
 function toggleCart(){
-  document.getElementById("cart").classList.toggle("active");
+ document.getElementById("cart").classList.toggle("active");
 }
 
-function search(val){
-  current = products.filter(p =>
-    p.name.toLowerCase().includes(val.toLowerCase())
-  );
-  load();
+function search(v){
+ current = products.filter(p =>
+  p.name.toLowerCase().includes(v.toLowerCase())
+ );
+ load();
 }
 
-function filterCat(cat){
-  current = (cat === "all") ? [...products] : products.filter(p => p.cat === cat);
-  load();
-}
-
-function sortProducts(type){
-  if(type === "low") current.sort((a,b)=>a.price-b.price);
-  if(type === "high") current.sort((a,b)=>b.price-a.price);
-  load();
-}
-
-function checkout(){
-  alert("Checkout page (UI only)");
-}
-
-function placeOrder(){
-  alert("Order placed!");
-  cart = [];
-  save();
-}
-
-function toggleTheme(){
-  document.body.classList.toggle("dark");
+function filter(c){
+ current = (c === "all") ? products : products.filter(p => p.cat === c);
+ load();
 }
 
 load();
-update();
