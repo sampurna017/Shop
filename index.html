@@ -9,29 +9,33 @@
 
 <body>
 
-<!-- TOP BAR -->
+<!-- TOP NAV -->
 <div class="top">
   <h2>MyShop</h2>
   <input placeholder="Search..." onkeyup="search(this.value)">
   <button onclick="toggleCart()">🛒 (<span id="count">0</span>)</button>
 </div>
 
-<!-- CATEGORY -->
-<div class="cat">
-  <span onclick="filter('all')">All</span>
-  <span onclick="filter('clothes')">Clothes</span>
-  <span onclick="filter('tech')">Electronics</span>
+<!-- MAIN LAYOUT -->
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h3>Categories</h3>
+    <p onclick="filter('all')">All</p>
+    <p onclick="filter('clothes')">Clothes</p>
+    <p onclick="filter('tech')">Electronics</p>
+    <p onclick="filter('home')">Home</p>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="products" id="products"></div>
+
 </div>
-
-<!-- BANNER -->
-<div class="banner">🔥 Flash Sale - Big Discounts!</div>
-
-<!-- PRODUCTS -->
-<div class="products" id="products"></div>
 
 <!-- CART -->
 <div class="cart" id="cart">
-  <h3>Cart</h3>
+  <h3>Your Cart</h3>
   <div id="items"></div>
   <h4>Total: Rs <span id="total">0</span></h4>
 </div>
