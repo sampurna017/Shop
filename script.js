@@ -2,12 +2,12 @@ let products = [
  {id:1,name:"Shoes",price:2500,old:3000,cat:"clothes",img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff"},
  {id:2,name:"T-Shirt",price:1500,old:2000,cat:"clothes",img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"},
  {id:3,name:"Jacket",price:3500,old:4500,cat:"clothes",img:"https://images.unsplash.com/photo-1520975916090-3105956dac38"},
- {id:4,name:"Headphones",price:4000,old:5000,cat:"tech",img:"https://images.unsplash.com/photo-1518441902110-1c16b7b8b2c3"},
- {id:5,name:"Watch",price:5000,old:6500,cat:"tech",img:"https://images.unsplash.com/photo-1518546305927-5a555bb7020d"},
+{id:4,name:"Headphones",price:4000,old:5000,cat:"tech",img:"https://cdn.pixabay.com/photo/2016/11/29/09/08/headphones-1868612_1280.jpg"},
+{id:5,name:"Watch",price:5000,old:6500,cat:"tech",img:"https://cdn.pixabay.com/photo/2017/08/06/00/22/watch-2585174_1280.jpg"},
  {id:6,name:"Phone",price:20000,old:25000,cat:"tech",img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"},
  {id:7,name:"Chair",price:3000,old:4000,cat:"home",img:"https://images.unsplash.com/photo-1503602642458-232111445657"},
- {id:8,name:"Table",price:7000,old:9000,cat:"home",img:"https://images.unsplash.com/photo-1493666438817-866a91353ca9"}
-];
+ {id:8,name:"Table",price:7000,old:9000,cat:"home",img:"https://cdn.pixabay.com/photo/2016/11/18/16/16/table-1839928_1280.jpg"}
+
 
 let cart=[];
 let current=[...products];
