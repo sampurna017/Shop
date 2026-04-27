@@ -12,14 +12,15 @@ let products = [
 let cart = [];
 let current = [...products];
 
+/* LOAD PRODUCTS */
 function load(){
- let box=document.getElementById("products");
- box.innerHTML="";
+ let box = document.getElementById("products");
+ box.innerHTML = "";
 
  current.forEach((p)=>{
-  let dis=Math.round(((p.old-p.price)/p.old)*100);
+  let dis = Math.round(((p.old - p.price)/p.old)*100);
 
-  box.innerHTML+=`
+  box.innerHTML += `
   <div class="card">
    <div class="badge">-${dis}%</div>
    <img src="${p.img}">
@@ -31,6 +32,7 @@ function load(){
  });
 }
 
+/* ADD ITEM */
 function add(id){
  let item = products.find(p => p.id === id);
  let exist = cart.find(c => c.id === id);
@@ -44,26 +46,71 @@ function add(id){
  update();
 }
 
+/* INCREASE */
+function increase(id){
+ let item = cart.find(p => p.id === id);
+ if(item){
+  item.qty++;
+  update();
+ }
+}
+
+/* DECREASE */
+function decrease(id){
+ let item = cart.find(p => p.id === id);
+ if(item){
+  item.qty--;
+  if(item.qty <= 0){
+   cart = cart.filter(p => p.id !== id);
+  }
+  update();
+ }
+}
+
+/* REMOVE */
+function removeItem(id){
+ cart = cart.filter(p => p.id !== id);
+ update();
+}
+
+/* UPDATE CART UI */
 function update(){
- let items=document.getElementById("items");
- items.innerHTML="";
- let total=0;
- let count=0;
+ let items = document.getElementById("items");
+ items.innerHTML = "";
+
+ let total = 0;
+ let count = 0;
 
  cart.forEach(p=>{
   total += p.price * p.qty;
   count += p.qty;
-  items.innerHTML += `<p>${p.name} x${p.qty} - Rs ${p.price*p.qty}</p>`;
+
+  items.innerHTML += `
+    <div class="cart-item">
+      <div class="cart-info">
+        <strong>${p.name}</strong><br>
+        Rs ${p.price} x ${p.qty}
+      </div>
+
+      <div class="cart-controls">
+        <button onclick="decrease(${p.id})">-</button>
+        <button onclick="increase(${p.id})">+</button>
+        <button onclick="removeItem(${p.id})" style="background:red;color:white;">X</button>
+      </div>
+    </div>
+  `;
  });
 
- document.getElementById("total").innerText=total;
- document.getElementById("count").innerText=count;
+ document.getElementById("total").innerText = total;
+ document.getElementById("count").innerText = count;
 }
 
+/* TOGGLE CART */
 function toggleCart(){
  document.getElementById("cart").classList.toggle("active");
 }
 
+/* SEARCH */
 function search(v){
  current = products.filter(p =>
   p.name.toLowerCase().includes(v.toLowerCase())
@@ -71,18 +118,20 @@ function search(v){
  load();
 }
 
+/* FILTER */
 function filter(c){
- current = (c==="all") ? products : products.filter(p => p.cat===c);
+ current = (c==="all") ? products : products.filter(p => p.cat === c);
  load();
 }
 
+/* PURCHASE */
 function purchase(){
- if(cart.length===0){
+ if(cart.length === 0){
   alert("Cart is empty!");
   return;
  }
  alert("✅ Successfully Purchased!\nThank you!");
- cart=[];
+ cart = [];
  update();
  toggleCart();
 }
