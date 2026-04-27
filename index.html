@@ -1,148 +1,54 @@
-let products = [
- {id:1,name:"Shoes",price:2500,old:3000,cat:"clothes",img:"https://source.unsplash.com/300x300/?shoes"},
- {id:2,name:"T-Shirt",price:1500,old:2000,cat:"clothes",img:"https://source.unsplash.com/300x300/?tshirt"},
- {id:3,name:"Jacket",price:3500,old:4500,cat:"clothes",img:"https://source.unsplash.com/300x300/?jacket"},
- {id:4,name:"Headphones",price:4000,old:5000,cat:"tech",img:"https://source.unsplash.com/300x300/?headphones"},
- {id:5,name:"Watch",price:5000,old:6500,cat:"tech",img:"https://source.unsplash.com/300x300/?watch"},
- {id:6,name:"Phone",price:20000,old:25000,cat:"tech",img:"https://source.unsplash.com/300x300/?smartphone"},
- {id:7,name:"Chair",price:3000,old:4000,cat:"home",img:"https://source.unsplash.com/300x300/?chair"},
- {id:8,name:"Table",price:7000,old:9000,cat:"home",img:"https://source.unsplash.com/300x300/?table"}
-];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyShop</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-let cart = [];
-let current = [...products];
+<body>
 
-/* LOAD PRODUCTS */
-function load(){
- let box = document.getElementById("products");
- box.innerHTML = "";
+<!-- NAV -->
+<div class="nav">
+  <h2>MyShop</h2>
+  <input placeholder="Search..." onkeyup="search(this.value)">
+  <button onclick="toggleCart()">🛒 Cart (<span id="count">0</span>)</button>
+</div>
 
- current.forEach((p)=>{
-  let dis = Math.round(((p.old - p.price)/p.old)*100);
+<!-- BANNER -->
+<div class="banner">
+  <h1>🔥 Big Sale</h1>
+  <p>Up to 50% OFF</p>
+</div>
 
-  box.innerHTML += `
-  <div class="card">
-   <div class="badge">-${dis}%</div>
-   <img src="${p.img}">
-   <h4>${p.name}</h4>
-   <div class="price">Rs ${p.price}</div>
-   <div class="old">Rs ${p.old}</div>
-   <button onclick="add(${p.id})">Add</button>
-  </div>`;
- });
-}
+<div class="main">
 
-/* ADD ITEM */
-function add(id){
- let item = products.find(p => p.id === id);
- let exist = cart.find(c => c.id === id);
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h3>Categories</h3>
+    <p onclick="filter('all')">All</p>
+    <p onclick="filter('clothes')">Clothes</p>
+    <p onclick="filter('tech')">Electronics</p>
+    <p onclick="filter('home')">Home</p>
+  </div>
 
- if(exist){
-  exist.qty++;
- } else {
-  cart.push({...item, qty:1});
- }
+  <!-- PRODUCTS -->
+  <div class="products" id="products"></div>
 
- update();
- showToast();
-}
+</div>
 
-/* INCREASE */
-function increase(id){
- let item = cart.find(p => p.id === id);
- if(item){
-  item.qty++;
-  update();
- }
-}
+<!-- CART -->
+<div class="cart" id="cart">
+  <h3>Your Cart</h3>
+  <div id="items"></div>
+  <h4>Total: Rs <span id="total">0</span></h4>
+  <button onclick="purchase()">Purchase</button>
+</div>
 
-/* DECREASE */
-function decrease(id){
- let item = cart.find(p => p.id === id);
- if(item){
-  item.qty--;
-  if(item.qty <= 0){
-   cart = cart.filter(p => p.id !== id);
-  }
-  update();
- }
-}
+<!-- TOAST -->
+<div id="toast">Added to cart</div>
 
-/* REMOVE */
-function removeItem(id){
- cart = cart.filter(p => p.id !== id);
- update();
-}
-
-/* UPDATE CART */
-function update(){
- let items = document.getElementById("items");
- items.innerHTML = "";
-
- let total = 0;
- let count = 0;
-
- cart.forEach(p=>{
-  total += p.price * p.qty;
-  count += p.qty;
-
-  items.innerHTML += `
-    <div class="cart-item">
-      <div class="cart-info">
-        <strong>${p.name}</strong><br>
-        Rs ${p.price} x ${p.qty}
-      </div>
-
-      <div class="cart-controls">
-        <button onclick="decrease(${p.id})">-</button>
-        <button onclick="increase(${p.id})">+</button>
-        <button onclick="removeItem(${p.id})" style="background:red;color:white;">X</button>
-      </div>
-    </div>
-  `;
- });
-
- document.getElementById("total").innerText = total;
- document.getElementById("count").innerText = count;
-}
-
-/* TOGGLE CART */
-function toggleCart(){
- document.getElementById("cart").classList.toggle("active");
-}
-
-/* SEARCH */
-function search(v){
- current = products.filter(p =>
-  p.name.toLowerCase().includes(v.toLowerCase())
- );
- load();
-}
-
-/* FILTER */
-function filter(c){
- current = (c==="all") ? products : products.filter(p => p.cat === c);
- load();
-}
-
-/* PURCHASE */
-function purchase(){
- if(cart.length === 0){
-  alert("Cart is empty!");
-  return;
- }
- alert("✅ Successfully Purchased!\nThank you!");
- cart = [];
- update();
- toggleCart();
-}
-
-/* TOAST */
-function showToast(){
- let t = document.getElementById("toast");
- if(!t) return;
- t.classList.add("show");
- setTimeout(()=>t.classList.remove("show"),1500);
-}
-
-load();
+<script src="script.js"></script>
+</body>
+</html>
