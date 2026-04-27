@@ -1,16 +1,12 @@
 let products=[
- {name:"Shoes",price:2500,old:3000,cat:"clothes",rating:4.5,img:"https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg"},
- {name:"T-Shirt",price:1500,old:2000,cat:"clothes",rating:4.2,img:"https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg"},
- {name:"Headphones",price:4000,old:5000,cat:"tech",rating:4.7,img:"https://images.pexels.com/photos/3394665/pexels-photo-3394665.jpeg"},
- {name:"Watch",price:5000,old:6500,cat:"tech",rating:4.4,img:"https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg"}
+ {name:"Shoes",price:2500,old:3000,cat:"clothes",img:"https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg"},
+ {name:"T-Shirt",price:1500,old:2000,cat:"clothes",img:"https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg"},
+ {name:"Headphones",price:4000,old:5000,cat:"tech",img:"https://images.pexels.com/photos/3394665/pexels-photo-3394665.jpeg"},
+ {name:"Watch",price:5000,old:6500,cat:"tech",img:"https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg"}
 ];
 
 let cart=[];
 let current=[...products];
-
-function stars(r){
- return "★".repeat(Math.floor(r)) + "☆";
-}
 
 function load(){
  let box=document.getElementById("products");
@@ -23,14 +19,10 @@ function load(){
   <div class="card">
    <div class="badge">-${dis}%</div>
    <img src="${p.img}">
-   <div class="content">
-    <h4>${p.name}</h4>
-    <div class="rating">${stars(p.rating)}</div>
-    <div class="price">Rs ${p.price}</div>
-    <div class="old">Rs ${p.old}</div>
-    <div class="tag">Free Delivery</div>
-    <button onclick="add(${i})">Add to Cart</button>
-   </div>
+   <h4>${p.name}</h4>
+   <div class="price">Rs ${p.price}</div>
+   <div class="old">Rs ${p.old}</div>
+   <button onclick="add(${i})">Add</button>
   </div>`;
  });
 }
@@ -66,6 +58,17 @@ function search(v){
 function filter(c){
  current=(c==="all")?products:products.filter(p=>p.cat===c);
  load();
+}
+
+function purchase(){
+ if(cart.length===0){
+  alert("Cart is empty!");
+  return;
+ }
+ alert("✅ Successfully Purchased!\nThank you for shopping!");
+ cart=[];
+ update();
+ toggleCart();
 }
 
 load();
