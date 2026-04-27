@@ -9,22 +9,18 @@
 
 <body>
 
-<!-- NAV -->
 <div class="nav">
   <h2>MyShop</h2>
   <input placeholder="Search..." onkeyup="search(this.value)">
   <button onclick="toggleCart()">🛒 Cart (<span id="count">0</span>)</button>
 </div>
 
-<!-- BANNER -->
 <div class="banner">
   <h1>🔥 Big Sale</h1>
   <p>Up to 50% OFF</p>
 </div>
 
 <div class="main">
-
-  <!-- SIDEBAR -->
   <div class="sidebar">
     <h3>Categories</h3>
     <p onclick="filter('all')">All</p>
@@ -33,12 +29,9 @@
     <p onclick="filter('home')">Home</p>
   </div>
 
-  <!-- PRODUCTS -->
   <div class="products" id="products"></div>
-
 </div>
 
-<!-- CART -->
 <div class="cart" id="cart">
   <h3>Your Cart</h3>
   <div id="items"></div>
@@ -46,7 +39,6 @@
   <button onclick="purchase()">Purchase</button>
 </div>
 
-<!-- TOAST -->
 <div id="toast">Added to cart</div>
 
 <script src="script.js"></script>
