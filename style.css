@@ -49,7 +49,6 @@ body{
   cursor:pointer;
   border-radius:5px;
 }
-
 .sidebar p:hover{background:#333}
 
 /* PRODUCTS */
@@ -69,7 +68,6 @@ body{
   position:relative;
   transition:.3s;
 }
-
 .card:hover{transform:translateY(-5px)}
 
 .card img{
