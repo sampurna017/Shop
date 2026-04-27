@@ -4,67 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MyShop</title>
-
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- NAV -->
-<div class="nav">
+<!-- TOP BAR -->
+<div class="top">
   <h2>MyShop</h2>
   <input placeholder="Search..." onkeyup="search(this.value)">
-  <div>
-    <button onclick="toggleTheme()">🌙</button>
-    <button onclick="toggleCart()">🛒 (<span id="count">0</span>)</button>
-  </div>
+  <button onclick="toggleCart()">🛒 (<span id="count">0</span>)</button>
 </div>
 
-<!-- HERO -->
-<div class="hero">Welcome to MyShop</div>
-
-<!-- FILTER -->
-<div class="bar">
-  <select onchange="filterCat(this.value)">
-    <option value="all">All</option>
-    <option value="clothes">Clothes</option>
-    <option value="tech">Tech</option>
-  </select>
-
-  <select onchange="sortProducts(this.value)">
-    <option value="default">Sort</option>
-    <option value="low">Price Low</option>
-    <option value="high">Price High</option>
-  </select>
+<!-- CATEGORY -->
+<div class="cat">
+  <span onclick="filter('all')">All</span>
+  <span onclick="filter('clothes')">Clothes</span>
+  <span onclick="filter('tech')">Electronics</span>
 </div>
+
+<!-- BANNER -->
+<div class="banner">🔥 Flash Sale - Big Discounts!</div>
 
 <!-- PRODUCTS -->
 <div class="products" id="products"></div>
 
 <!-- CART -->
 <div class="cart" id="cart">
-  <h2>Cart</h2>
+  <h3>Cart</h3>
   <div id="items"></div>
-  <h3>Total: $<span id="total">0</span></h3>
-  <button onclick="checkout()">Checkout</button>
+  <h4>Total: Rs <span id="total">0</span></h4>
 </div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-box" id="modalBox"></div>
-</div>
-
-<!-- CHECKOUT -->
-<div class="modal" id="checkoutBox">
-  <div class="modal-box">
-    <h3>Checkout</h3>
-    <input placeholder="Name"><br>
-    <input placeholder="Address"><br>
-    <button onclick="placeOrder()">Place Order</button>
-  </div>
-</div>
-
-<div class="footer">© 2026 MyShop</div>
 
 <script src="script.js"></script>
 </body>
