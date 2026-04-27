@@ -1,12 +1,12 @@
 let products = [
- {id:1,name:"Shoes",price:2500,old:3000,cat:"clothes",img:"https://picsum.photos/200?1"},
- {id:2,name:"T-Shirt",price:1500,old:2000,cat:"clothes",img:"https://picsum.photos/200?2"},
- {id:3,name:"Jacket",price:3500,old:4500,cat:"clothes",img:"https://picsum.photos/200?3"},
- {id:4,name:"Headphones",price:4000,old:5000,cat:"tech",img:"https://picsum.photos/200?4"},
- {id:5,name:"Watch",price:5000,old:6500,cat:"tech",img:"https://picsum.photos/200?5"},
- {id:6,name:"Phone",price:20000,old:25000,cat:"tech",img:"https://picsum.photos/200?6"},
- {id:7,name:"Chair",price:3000,old:4000,cat:"home",img:"https://picsum.photos/200?7"},
- {id:8,name:"Table",price:7000,old:9000,cat:"home",img:"https://picsum.photos/200?8"}
+ {id:1,name:"Shoes",price:2500,old:3000,cat:"clothes",img:"https://source.unsplash.com/300x300/?shoes"},
+ {id:2,name:"T-Shirt",price:1500,old:2000,cat:"clothes",img:"https://source.unsplash.com/300x300/?tshirt"},
+ {id:3,name:"Jacket",price:3500,old:4500,cat:"clothes",img:"https://source.unsplash.com/300x300/?jacket"},
+ {id:4,name:"Headphones",price:4000,old:5000,cat:"tech",img:"https://source.unsplash.com/300x300/?headphones"},
+ {id:5,name:"Watch",price:5000,old:6500,cat:"tech",img:"https://source.unsplash.com/300x300/?watch"},
+ {id:6,name:"Phone",price:20000,old:25000,cat:"tech",img:"https://source.unsplash.com/300x300/?smartphone"},
+ {id:7,name:"Chair",price:3000,old:4000,cat:"home",img:"https://source.unsplash.com/300x300/?chair"},
+ {id:8,name:"Table",price:7000,old:9000,cat:"home",img:"https://source.unsplash.com/300x300/?table"}
 ];
 
 let cart = [];
@@ -44,6 +44,7 @@ function add(id){
  }
 
  update();
+ showToast();
 }
 
 /* INCREASE */
@@ -73,7 +74,7 @@ function removeItem(id){
  update();
 }
 
-/* UPDATE CART UI */
+/* UPDATE CART */
 function update(){
  let items = document.getElementById("items");
  items.innerHTML = "";
@@ -134,6 +135,14 @@ function purchase(){
  cart = [];
  update();
  toggleCart();
+}
+
+/* TOAST */
+function showToast(){
+ let t = document.getElementById("toast");
+ if(!t) return;
+ t.classList.add("show");
+ setTimeout(()=>t.classList.remove("show"),1500);
 }
 
 load();
