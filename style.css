@@ -1,90 +1,99 @@
 body{
   margin:0;
   font-family:Arial;
-  background:#f5f5f5;
+  background:#f1f1f1;
 }
 
 /* TOP BAR */
 .top{
-  background:#f85606;
+  background:#131921;
   color:white;
-  padding:10px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+  padding:10px 20px;
 }
+
 .top input{
   width:50%;
   padding:8px;
-  border:none;
 }
 
-/* CATEGORY */
-.cat{
-  background:white;
-  padding:10px;
+/* LAYOUT */
+.container{
   display:flex;
-  gap:20px;
-}
-.cat span{
-  cursor:pointer;
 }
 
-/* BANNER */
-.banner{
-  background:#ff6a00;
-  color:white;
-  text-align:center;
-  padding:20px;
-  font-size:20px;
+/* SIDEBAR */
+.sidebar{
+  width:200px;
+  background:white;
+  padding:15px;
+}
+
+.sidebar p{
+  cursor:pointer;
+  padding:8px;
+}
+
+.sidebar p:hover{
+  background:#eee;
 }
 
 /* PRODUCTS */
 .products{
+  flex:1;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
   gap:15px;
-  padding:20px;
+  padding:15px;
 }
 
 .card{
   background:white;
   padding:10px;
   position:relative;
+  border-radius:5px;
+  font-size:14px;
 }
 
 .card img{
   width:100%;
-  height:150px;
+  height:120px; /* smaller like Amazon */
   object-fit:cover;
 }
 
 /* BADGE */
 .badge{
   position:absolute;
-  top:10px;
-  left:10px;
-  background:red;
+  top:5px;
+  left:5px;
+  background:#ff3b30;
   color:white;
+  font-size:11px;
+  padding:2px 5px;
+}
+
+/* PRICE */
+.price{
+  color:#f85606;
+  font-weight:bold;
+}
+
+.old{
+  text-decoration:line-through;
+  color:gray;
   font-size:12px;
-  padding:3px 6px;
 }
 
 /* TAG */
 .tag{
   background:green;
   color:white;
-  font-size:12px;
-  padding:2px 5px;
+  font-size:11px;
+  padding:2px 4px;
   display:inline-block;
-  margin-top:5px;
-}
-
-/* PRICE */
-.old{
-  text-decoration:line-through;
-  color:gray;
-  font-size:13px;
+  margin-top:3px;
 }
 
 /* CART */
@@ -95,18 +104,18 @@ body{
   width:300px;
   height:100%;
   background:white;
-  padding:10px;
+  padding:15px;
   transition:.3s;
 }
+
 .cart.active{
   right:0;
 }
 
 button{
   background:#f85606;
-  color:white;
   border:none;
+  color:white;
   padding:5px;
-  margin-top:5px;
   cursor:pointer;
 }
