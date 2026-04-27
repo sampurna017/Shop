@@ -8,6 +8,7 @@ let products = [
  {id:7,name:"Chair",price:3000,old:4000,cat:"home",img:"https://images.unsplash.com/photo-1503602642458-232111445657"},
  {id:8,name:"Table",price:7000,old:9000,cat:"home",img:"https://cdn.pixabay.com/photo/2016/11/18/16/16/table-1839928_1280.jpg"}
 ];
+
 let cart=[];
 let current=[...products];
 
